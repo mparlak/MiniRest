@@ -59,6 +59,7 @@ namespace MiniRest.NetCore
             {
                 var webRequest = WebRequest.Create(BaseUrl + RestRequest.Resource) as HttpWebRequest;
                 if (webRequest == null) return null;
+                webRequest.Headers = request.Headers;
                 webRequest.Method = RestRequest.Method.ToString();
                 if (!string.IsNullOrEmpty(RestRequest.ContentType))
                     webRequest.ContentType = RestRequest.ContentType;

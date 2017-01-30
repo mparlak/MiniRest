@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace MiniRest.NetCore
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IRestRequest
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        WebHeaderCollection Headers { get; set; }
         /// <summary>
         /// Query string value
         /// </summary>
@@ -38,8 +46,38 @@ namespace MiniRest.NetCore
         /// <param name="format"></param>
         /// <returns></returns>
         IRestRequest AddDataFormat(DataFormat format);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="method"></param>
+        /// <returns></returns>
         IRestRequest AddMethod(Method method);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         IRestRequest AddBody(object data);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
         IRestRequest AddContentType(string contentType);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        IRestRequest AddBasicAuthentication(string username, string password);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        IRestRequest AddWebHeaderCollection(string key, string data);
     }
 }

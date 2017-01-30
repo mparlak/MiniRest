@@ -29,6 +29,18 @@ namespace MiniRest.NetCore.Api.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            IRestClient client = new RestClient("http://user.com");
+
+            IRestRequest request = new RestRequest("/user");
+
+            request.AddContentType("application/json"); request.AddDataFormat(DataFormat.Json);
+            request.AddMethod(Method.Post);
+            //if (data != null)
+            //    request.AddBody(data);
+
+            IRestResponse response = client.ExecuteAsync(request);
+            var content = response.Content;
+
         }
 
         // PUT api/values/5
