@@ -1,10 +1,13 @@
-Features
+# MiniRest - .NET Core REST Client
 
-	-Supports .Net Core
-	-Supports XML and JSON deserialization
+### Features
 
-Examples
+* Supports .Net Core
+* Supports XML and JSON deserialization
+* Supports Basic Authentication
+* Supports WebHeaderCollection extra parameter 
 
+```csharp
 IRestClient client = new RestClient("http://user.com");
 
 IRestRequest request = new RestRequest("/user");
@@ -20,3 +23,4 @@ var content = response.Content
  
 IRestResponse<User> response = client.ExecuteAsync<User>(request);
 var data = response.Data
+```
