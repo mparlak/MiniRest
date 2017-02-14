@@ -12,32 +12,39 @@ namespace MiniRest.NetCore
 {
     public sealed class RestClient : IRestClient
     {
-        public IRestRequest RestRequest { get; set; }
-        public Uri BaseUrl { get; set; }
+        private readonly IRestRequest _restRequest;
+        private readonly IHttpFactory _httpFactory;
 
-        public RestClient(string baseUrl)
+        public RestClient(IRestRequest restRequest)
         {
-            if (string.IsNullOrEmpty(baseUrl))
+            if (restRequest == null)
             {
-                throw new ArgumentNullException(nameof(baseUrl));
+                throw new ArgumentNullException(nameof(restRequest));
             }
-            this.BaseUrl = new Uri(baseUrl);
+            _restRequest = restRequest;
+            _httpFactory = new HttpFactory(_restRequest);
         }
 
-        public IRestResponse ExecuteAsync(IRestRequest request)
+        public IRestResponse Execute()
         {
-            IHttpResponse response = Execute(request).Result;
+            IHttpResponse response = _httpFactory.Execute().Result;
             return ResponseMapper.ToResponse(response);
         }
 
-        public IRestResponse<T> ExecuteAsync<T>(IRestRequest request) where T : new()
+        public IRestResponse ExecuteAsync()
         {
-            IHttpResponse httpResponse = Execute(request).Result;
+            IHttpResponse response = _httpFactory.Execute().Result;
+            return ResponseMapper.ToResponse(response);
+        }
+
+        public IRestResponse<T> Execute<T>() where T : new()
+        {
+            IHttpResponse httpResponse = _httpFactory.Execute().Result;
             IRestResponse<T> restResponse;
             try
             {
                 restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
-                restResponse.Data = Parser.Deserialize<T>(request.DataFormat, httpResponse.Content);
+                restResponse.Data = Parser.Deserialize<T>(_restRequest.DataFormat, httpResponse.Content);
             }
             catch (Exception ex)
             {
@@ -51,61 +58,25 @@ namespace MiniRest.NetCore
             return restResponse;
         }
 
-        private async Task<IHttpResponse> Execute(IRestRequest request)
+        public async Task<IRestResponse<T>> ExecuteAsync<T>() where T : new()
         {
-            RestRequest = request;
-            IHttpResponse response = new HttpResponse();
+            IHttpResponse httpResponse = await _httpFactory.Execute();
+            IRestResponse<T> restResponse;
             try
             {
-                var webRequest = WebRequest.Create(BaseUrl + RestRequest.Resource) as HttpWebRequest;
-                if (webRequest == null) return null;
-                webRequest.Headers = request.Headers;
-                webRequest.Method = RestRequest.Method.ToString();
-                if (!string.IsNullOrEmpty(RestRequest.ContentType))
-                    webRequest.ContentType = RestRequest.ContentType;
-                if (RestRequest.Method == Method.Post || RestRequest.Method == Method.Put ||
-                    RestRequest.Method == Method.Delete)
-                {
-                    var output = Parser.Serialize(RestRequest.DataFormat, RestRequest.Body);
-                    var byteArray = Encoding.UTF8.GetBytes(output);
-                    using (var stream = await webRequest.GetRequestStreamAsync())
-                    {
-                        stream.Write(byteArray, 0, byteArray.Length);
-                    }
-                }
-                using (var webResponse = await webRequest.GetResponseAsync())
-                {
-                    using (var streamReader = new StreamReader(webResponse.GetResponseStream()))
-                    {
-                        string result = streamReader.ReadToEnd();
-                        response.Content = result;
-                        switch (RestRequest.Method)
-                        {
-                            case Method.Post:
-                                response.StatusCode = HttpStatusCode.Created;
-                                break;
-                            case Method.Put:
-                            case Method.Delete:
-                                response.StatusCode = HttpStatusCode.NoContent;
-                                break;
-                            case Method.Get:
-                                response.StatusCode = HttpStatusCode.OK;
-                                break;
-                            default:
-                                response.StatusCode = HttpStatusCode.OK;
-                                break;
-                        }
-
-                    }
-                }
+                restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
+                restResponse.Data = Parser.Deserialize<T>(_restRequest.DataFormat, httpResponse.Content);
             }
-            catch (WebException ex)
+            catch (Exception ex)
             {
-                response.StatusCode = ((HttpWebResponse)ex.Response).StatusCode;
-                response.StatusDescription = ((HttpWebResponse)ex.Response).StatusDescription;
-                response.ErrorMessage = ex.Message;
-            }
-            return response;
+                restResponse = new RestResponse<T>
+                {
+                    StatusCode = httpResponse.StatusCode,
+                    StatusDescription = httpResponse.StatusDescription,
+                    ErrorMessage = ex.Message
+                };
+            };
+            return restResponse;
         }
     }
 }

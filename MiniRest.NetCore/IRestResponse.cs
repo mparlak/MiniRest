@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MiniRest.NetCore
 {
+    /// <summary>
+    /// RestResponse
+    /// </summary>
     public interface IRestResponse
     {
         /// <summary>
@@ -39,7 +42,7 @@ namespace MiniRest.NetCore
         string StatusDescription { get; set; }
 
         /// <summary>
-        /// The URL that actually responded to the content (different from request if redirected)
+        /// Url
         /// </summary>
         Uri ResponseUri { get; set; }
 

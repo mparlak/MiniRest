@@ -19,7 +19,11 @@ namespace MiniRest.NetCore
         /// <summary>
         /// 
         /// </summary>
-        public string Resource { get; set; }
+        public string Path { get; set; }
+        /// <summary>
+        /// Base Uri Http Request
+        /// </summary>
+        public string BaseUrl { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -48,12 +52,18 @@ namespace MiniRest.NetCore
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="resource"></param>
-        public RestRequest(string resource)
+        /// <param name="baseUrl"></param>
+        public RestRequest(string baseUrl)
         {
-            this.Resource = resource;
+            this.BaseUrl = baseUrl;
             this.Parameters = new List<Parameter>();
             this.Headers = new WebHeaderCollection();
+        }
+
+        public IRestRequest AddPath(string path)
+        {
+            this.Path = path;
+            return this;
         }
 
         /// <summary>

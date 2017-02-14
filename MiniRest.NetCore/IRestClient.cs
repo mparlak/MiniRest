@@ -6,30 +6,31 @@ using System.Threading.Tasks;
 namespace MiniRest.NetCore
 {
     /// <summary>
-    /// 
+    /// RestClient
     /// </summary>
     public interface IRestClient
     {
         /// <summary>
         /// 
         /// </summary>
-        IRestRequest RestRequest { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        Uri BaseUrl { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
         /// <returns></returns>
-        IRestResponse ExecuteAsync(IRestRequest request);
+        IRestResponse Execute();
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="request"></param>
+        /// <returns></returns>
+        IRestResponse ExecuteAsync();
+        /// <summary>
+        /// 
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IRestResponse<T> ExecuteAsync<T>(IRestRequest request) where T : new();
+        IRestResponse<T> Execute<T>() where T : new();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        Task<IRestResponse<T>> ExecuteAsync<T>() where T : new();
     }
 }

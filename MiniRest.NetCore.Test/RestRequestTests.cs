@@ -12,24 +12,26 @@ namespace MiniRest.NetCore.Test
         [Test]
         public void Get()
         {
-            IRestClient client = new RestClient("http://localhost:3508");
-            IRestRequest request = new RestRequest("/api/test");
+            IRestRequest request = new RestRequest("http://localhost:15670");
+            request.AddPath("/api/test");
             request.AddContentType("application/json");
             request.AddDataFormat(DataFormat.Json);
             request.AddMethod(Method.Get);
-            var response = client.ExecuteAsync<object>(request);
+            IRestClient client = new RestClient(request);
+            var response = client.Execute<object>();
         }
 
         [Test]
         public void Post()
         {
-            IRestClient client = new RestClient("http://localhost:3508");
-            IRestRequest request = new RestRequest("/api/gateway");
+            IRestRequest request = new RestRequest("http://localhost:3508");
+            request.AddPath("/api/gateway");
             request.AddContentType("application/json");
             request.AddDataFormat(DataFormat.Json);
             request.AddMethod(Method.Post);
             request.AddBody("Request Post body data");
-            var response = client.ExecuteAsync<object>(request);
+            IRestClient client = new RestClient(request);
+            var response = client.Execute<object>();
         }
     }
 }

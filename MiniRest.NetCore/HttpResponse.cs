@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MiniRest.NetCore
 {
+    /// <summary>
+    /// Http Response
+    /// </summary>
     public class HttpResponse : IHttpResponse
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace MiniRest.NetCore
         }
 
         /// <summary>
-        /// MIME content type of response
+        /// Content type of response
         /// </summary>
         public string ContentType { get; set; }
 
@@ -52,7 +55,7 @@ namespace MiniRest.NetCore
         public byte[] RawBytes { get; set; }
 
         /// <summary>
-        /// The URL that actually responded to the content (different from request if redirected)
+        /// Url
         /// </summary>
         public Uri ResponseUri { get; set; }
 
@@ -79,7 +82,6 @@ namespace MiniRest.NetCore
         /// <summary>
         /// The HTTP protocol version (1.0, 1.1, etc)
         /// </summary>
-        /// <remarks>Only set when underlying framework supports it.</remarks>
         public Version ProtocolVersion { get; set; }
 
     }

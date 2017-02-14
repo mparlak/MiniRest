@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MiniRest.NetCore
 {
     /// <summary>
-    /// 
+    /// RestRequest
     /// </summary>
     public interface IRestRequest
     {
@@ -18,7 +18,11 @@ namespace MiniRest.NetCore
         /// <summary>
         /// Query string value
         /// </summary>
-        string Resource { get; set; }
+        string Path { get; set; }
+        /// <summary>
+        /// Base Uri Http Request
+        /// </summary>
+        string BaseUrl { get; set; }
         /// <summary>
         /// Supported multipartFormData
         /// </summary>
@@ -40,6 +44,12 @@ namespace MiniRest.NetCore
         /// Request ContentType
         /// </summary>
         string ContentType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        IRestRequest AddPath(string path);
         /// <summary>
         /// This format for request body(Post,Put,Delete)
         /// </summary>

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MiniRest.NetCore
 {
+    /// <summary>
+    /// HttpResponse
+    /// </summary>
     public interface IHttpResponse
     {
         /// <summary>

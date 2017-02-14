@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 namespace MiniRest.NetCore
 {
     /// <summary>
-    /// 
+    /// Parameter
     /// </summary>
     public class Parameter
     {
         /// <summary>
-        /// 
+        /// Name
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 
+        /// Value
         /// </summary>
         public object Value { get; set; }
     }
