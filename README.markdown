@@ -5,22 +5,26 @@
 * Supports .Net Core
 * Supports XML and JSON deserialization
 * Supports Basic Authentication
-* Supports WebHeaderCollection extra parameter 
+* Supports WebHeaderCollection extra parameter
 
 ```csharp
-IRestClient client = new RestClient("http://user.com");
+//Http Get
+IRestRequest request = new RestRequest("http://localhost:15670");
+request.AddPath("/api/test");
+request.AddContentType("application/json");
+request.AddDataFormat(DataFormat.Json);
+request.AddMethod(Method.Get);
+IRestClient client = new RestClient(request);
+var response = client.Execute<object>();
 
-IRestRequest request = new RestRequest("/user");
-
+IRestRequest request = new RestRequest("http://localhost:3508");
+request.AddPath("/api/test");
 request.AddContentType("application/json");
 request.AddDataFormat(DataFormat.Json);
 request.AddMethod(Method.Post);
-if (data != null)
- request.AddBody(data);
- 
-IRestResponse response = client.ExecuteAsync(request);
-var content = response.Content 
- 
-IRestResponse<User> response = client.ExecuteAsync<User>(request);
+request.AddBody("Request Post body data");
+IRestClient client = new RestClient(request);
+var response = client.Execute<object>();
+//var response = await client.ExecuteAsync<object>();
 var data = response.Data
 ```
