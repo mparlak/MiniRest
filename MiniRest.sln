@@ -3,11 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore", "MiniRest.NetCore\MiniRest.NetCore.xproj", "{94AF1542-ABBB-468E-894C-9F0642DA0467}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CFBEB80-173F-4651-9EB6-88B601F1DC6D}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore.Api", "MiniRest.NetCore.Api\MiniRest.NetCore.Api.xproj", "{6BB57AFD-A433-4976-B879-14657694D763}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FFCBD7FF-DA91-44F1-A8E4-A80804F1AEF9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore.Test", "MiniRest.NetCore.Test\MiniRest.NetCore.Test.xproj", "{3B4A5EE2-D0ED-4793-9F26-0879FFCFAA48}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{331473D5-58AB-4451-B4DA-57DD61D9E606}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore", "src\MiniRest.NetCore\MiniRest.NetCore.xproj", "{94AF1542-ABBB-468E-894C-9F0642DA0467}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore.Api", "src\MiniRest.NetCore.Api\MiniRest.NetCore.Api.xproj", "{6BB57AFD-A433-4976-B879-14657694D763}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore.Test", "test\MiniRest.NetCore.Test\MiniRest.NetCore.Test.xproj", "{3B4A5EE2-D0ED-4793-9F26-0879FFCFAA48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +39,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{94AF1542-ABBB-468E-894C-9F0642DA0467} = {FFCBD7FF-DA91-44F1-A8E4-A80804F1AEF9}
+		{6BB57AFD-A433-4976-B879-14657694D763} = {FFCBD7FF-DA91-44F1-A8E4-A80804F1AEF9}
+		{3B4A5EE2-D0ED-4793-9F26-0879FFCFAA48} = {331473D5-58AB-4451-B4DA-57DD61D9E606}
 	EndGlobalSection
 EndGlobal
