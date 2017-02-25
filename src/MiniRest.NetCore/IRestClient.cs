@@ -11,23 +11,23 @@ namespace MiniRest.NetCore
     public interface IRestClient
     {
         /// <summary>
-        /// 
+        /// Execute Result
         /// </summary>
         /// <returns></returns>
         IRestResponse Execute();
         /// <summary>
-        /// 
+        /// Execute Result With Async
         /// </summary>
         /// <returns></returns>
-        IRestResponse ExecuteAsync();
+        Task<IRestResponse> ExecuteAsync();
         /// <summary>
-        /// 
+        /// Execute Result
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         IRestResponse<T> Execute<T>() where T : new();
         /// <summary>
-        /// 
+        /// Execute Result With Async
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

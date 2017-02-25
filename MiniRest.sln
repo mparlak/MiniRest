@@ -1,22 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CFBEB80-173F-4651-9EB6-88B601F1DC6D}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FFCBD7FF-DA91-44F1-A8E4-A80804F1AEF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{331473D5-58AB-4451-B4DA-57DD61D9E606}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore", "src\MiniRest.NetCore\MiniRest.NetCore.xproj", "{94AF1542-ABBB-468E-894C-9F0642DA0467}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniRest.NetCore", "src\MiniRest.NetCore\MiniRest.NetCore.csproj", "{94AF1542-ABBB-468E-894C-9F0642DA0467}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore.Api", "src\MiniRest.NetCore.Api\MiniRest.NetCore.Api.xproj", "{6BB57AFD-A433-4976-B879-14657694D763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniRest.NetCore.Api", "src\MiniRest.NetCore.Api\MiniRest.NetCore.Api.csproj", "{6BB57AFD-A433-4976-B879-14657694D763}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MiniRest.NetCore.Test", "test\MiniRest.NetCore.Test\MiniRest.NetCore.Test.xproj", "{3B4A5EE2-D0ED-4793-9F26-0879FFCFAA48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniRest.NetCore.Test", "test\MiniRest.NetCore.Test\MiniRest.NetCore.Test.csproj", "{3B4A5EE2-D0ED-4793-9F26-0879FFCFAA48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{95E47CD3-2710-4003-8F35-4F293495A20D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\MiniRest.NetCore\Backup\global.json = ..\..\..\Desktop\MiniRest.NetCore\Backup\global.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
