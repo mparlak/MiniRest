@@ -2,7 +2,7 @@
 
 ### Features
 
-* Supports .Net Core
+* Supports .Net Core and Net Framework
 * Supports XML and JSON deserialization
 * Supports Basic Authentication
 * Supports WebHeaderCollection extra parameter
