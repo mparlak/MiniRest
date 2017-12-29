@@ -47,23 +47,8 @@ namespace MiniRest
                     {
                         string result = streamReader.ReadToEnd();
                         response.Content = result;
-                        switch (_restRequest.Method)
-                        {
-                            case Method.Post:
-                                response.StatusCode = HttpStatusCode.Created;
-                                break;
-                            case Method.Put:
-                            case Method.Delete:
-                                response.StatusCode = HttpStatusCode.NoContent;
-                                break;
-                            case Method.Get:
-                                response.StatusCode = HttpStatusCode.OK;
-                                break;
-                            default:
-                                response.StatusCode = HttpStatusCode.OK;
-                                break;
-                        }
-
+                        response.StatusCode = ((System.Net.HttpWebResponse)webResponse).StatusCode;
+                        response.StatusDescription = ((System.Net.HttpWebResponse)webResponse).StatusDescription;
                     }
                 }
             }

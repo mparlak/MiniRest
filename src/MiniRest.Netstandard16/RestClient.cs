@@ -29,6 +29,7 @@ namespace MiniRest
             {
                 throw new ArgumentNullException(nameof(restRequest));
             }
+
             _restRequest = restRequest;
             _httpFactory = new HttpFactory(_restRequest);
         }
@@ -61,21 +62,13 @@ namespace MiniRest
         public IRestResponse<T> Execute<T>() where T : new()
         {
             IHttpResponse httpResponse = _httpFactory.Execute().Result;
-            IRestResponse<T> restResponse;
-            try
+
+            IRestResponse<T> restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
+
+            if (!string.IsNullOrEmpty(httpResponse.Content))
             {
-                restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
                 restResponse.Data = Parser.Deserialize<T>(_restRequest.DataFormat, httpResponse.Content);
             }
-            catch (Exception ex)
-            {
-                restResponse = new RestResponse<T>
-                {
-                    StatusCode = httpResponse.StatusCode,
-                    StatusDescription = httpResponse.StatusDescription,
-                    ErrorMessage = ex.Message
-                };
-            };
             return restResponse;
         }
 
@@ -87,21 +80,14 @@ namespace MiniRest
         public async Task<IRestResponse<T>> ExecuteAsync<T>() where T : new()
         {
             IHttpResponse httpResponse = await _httpFactory.Execute();
-            IRestResponse<T> restResponse;
-            try
+
+            IRestResponse<T> restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
+
+            if (!string.IsNullOrEmpty(httpResponse.Content))
             {
-                restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
                 restResponse.Data = Parser.Deserialize<T>(_restRequest.DataFormat, httpResponse.Content);
             }
-            catch (Exception ex)
-            {
-                restResponse = new RestResponse<T>
-                {
-                    StatusCode = httpResponse.StatusCode,
-                    StatusDescription = httpResponse.StatusDescription,
-                    ErrorMessage = ex.Message
-                };
-            };
+
             return restResponse;
         }
     }
