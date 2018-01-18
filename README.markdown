@@ -1,7 +1,7 @@
 # MiniRest - Fast Lightweight
 
 ### Features
-* Assemblies for .NET 4.6.1 , .NET Standard 1.6 and .NET Standard 2.0
+* Supports .NET 4.6.1 , .NET Standard 1.6 and .NET Standard 2.0
 * Supports .Net Core and Net Framework
 * Supports XML and JSON deserialization
 * Supports Basic Authentication
