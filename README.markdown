@@ -1,4 +1,6 @@
-# MiniRest - Fast Lightweight
+# MiniRest
+
+Fast Lightweight Http Api Client
 
 ### Features
 * Supports .NET 4.6.1 , .NET Standard 1.6 and .NET Standard 2.0
