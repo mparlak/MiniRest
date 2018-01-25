@@ -32,7 +32,7 @@ namespace MiniRest
                 webRequest.Method = _restRequest.Method.ToString();
                 if (!string.IsNullOrEmpty(_restRequest.ContentType))
                     webRequest.ContentType = _restRequest.ContentType;
-                if (_restRequest.Method == Method.Post || _restRequest.Method == Method.Put || _restRequest.Method == Method.Delete)
+                if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
                 {
                     var output = Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
                     var byteArray = Encoding.UTF8.GetBytes(output);

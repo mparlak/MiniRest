@@ -2,13 +2,15 @@
 <package >
   <metadata>
     <id>MiniRest</id>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
     <title>MiniRest</title>
     <authors>Muhammet Parlak</authors>
     <owners>Muhammet Parlak</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>description</description>
+    <description>REST and HTTP API Client</description>
     <releaseNotes>
+      1.0.6
+      • HttpMethod uppercase mac os bug fixed.
       1.0.4
       • HttpRequest base error not returned which fixed.
       1.0.3

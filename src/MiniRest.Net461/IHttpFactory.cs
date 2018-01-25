@@ -7,10 +7,7 @@ namespace MiniRest
 {
     public interface IHttpFactory
     {
-        /// <summary>
-        /// Http Request
-        /// </summary>
-        /// <returns></returns>
-        Task<IHttpResponse> Execute();
+        IHttpResponse Execute();
+        Task<IHttpResponse> ExecuteAsync();
     }
 }

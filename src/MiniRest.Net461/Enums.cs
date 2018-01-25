@@ -13,31 +13,31 @@ namespace MiniRest
         /// <summary>
         /// Http Method Get
         /// </summary>
-        Get,
+        GET,
         /// <summary>
         /// Http Method Post
         /// </summary>
-        Post,
+        POST,
         /// <summary>
         /// Http Method Put
         /// </summary>
-        Put,
+        PUT,
         /// <summary>
         /// Http Method Delete
         /// </summary>
-        Delete,
+        DELETE,
         /// <summary>
         /// Http Method Head
         /// </summary>
-        Head,
+        HEAD,
         /// <summary>
         /// Http Method Patch
         /// </summary>
-        Patch,
+        PATCH,
         /// <summary>
         /// Http Method Options
         /// </summary>
-        Options
+        OPTIONS
     }
 
     /// <summary>

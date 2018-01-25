@@ -25,12 +25,7 @@ namespace MiniRest
         /// <exception cref="ArgumentNullException"></exception>
         public RestClient(IRestRequest restRequest)
         {
-            if (restRequest == null)
-            {
-                throw new ArgumentNullException(nameof(restRequest));
-            }
-
-            _restRequest = restRequest;
+            _restRequest = restRequest ?? throw new ArgumentNullException(nameof(restRequest));
             _httpFactory = new HttpFactory(_restRequest);
         }
 

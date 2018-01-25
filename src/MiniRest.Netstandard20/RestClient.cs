@@ -25,12 +25,7 @@ namespace MiniRest
         /// <exception cref="ArgumentNullException"></exception>
         public RestClient(IRestRequest restRequest)
         {
-            if (restRequest == null)
-            {
-                throw new ArgumentNullException(nameof(restRequest));
-            }
-
-            _restRequest = restRequest;
+            _restRequest = restRequest ?? throw new ArgumentNullException(nameof(restRequest));
             _httpFactory = new HttpFactory(_restRequest);
         }
 
@@ -40,7 +35,7 @@ namespace MiniRest
         /// <returns></returns>
         public IRestResponse Execute()
         {
-            IHttpResponse response = _httpFactory.Execute().Result;
+            IHttpResponse response = _httpFactory.Execute();
             return ResponseMapper.ToResponse(response);
         }
 
@@ -50,7 +45,7 @@ namespace MiniRest
         /// <returns></returns>
         public async Task<IRestResponse> ExecuteAsync()
         {
-            IHttpResponse response = await _httpFactory.Execute();
+            IHttpResponse response = await _httpFactory.ExecuteAsync();
             return ResponseMapper.ToResponse(response);
         }
 
@@ -61,7 +56,7 @@ namespace MiniRest
         /// <returns></returns>
         public IRestResponse<T> Execute<T>() where T : new()
         {
-            IHttpResponse httpResponse = _httpFactory.Execute().Result;
+            IHttpResponse httpResponse = _httpFactory.Execute();
 
             IRestResponse<T> restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
 
@@ -79,7 +74,7 @@ namespace MiniRest
         /// <returns></returns>
         public async Task<IRestResponse<T>> ExecuteAsync<T>() where T : new()
         {
-            IHttpResponse httpResponse = await _httpFactory.Execute();
+            IHttpResponse httpResponse = await _httpFactory.ExecuteAsync();
 
             IRestResponse<T> restResponse = ResponseMapper.ToAsyncResponse<T>(httpResponse);
 
