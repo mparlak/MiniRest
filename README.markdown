@@ -1,11 +1,15 @@
-# MiniRest - .NET Core REST Client
+# MiniRest
+
+Fast Lightweight Http Api Client
 
 ### Features
-
+* Supports .NET 4.6.1 , .NET Standard 1.6 and .NET Standard 2.0
 * Supports .Net Core and Net Framework
 * Supports XML and JSON deserialization
 * Supports Basic Authentication
 * Supports WebHeaderCollection extra parameter
+
+### Preview
 
 ```csharp
 //Http Get
