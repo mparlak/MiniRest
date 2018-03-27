@@ -54,8 +54,20 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
-                response.StatusCode = ((HttpWebResponse)ex.Response).StatusCode;
-                response.StatusDescription = ((HttpWebResponse)ex.Response).StatusDescription;
+                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
+
+                if (statusCode != null)
+                {
+                    response.StatusCode = (HttpStatusCode)statusCode;
+                }
+
+                var statusDescription = (ex.Response as HttpWebResponse)?.StatusDescription;
+
+                if (!string.IsNullOrEmpty(statusDescription))
+                {
+                    response.StatusDescription = statusDescription;
+                }
+
                 response.ErrorMessage = ex.Message;
             }
             return response;

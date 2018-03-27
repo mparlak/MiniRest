@@ -134,6 +134,9 @@ namespace MiniRest
             this.Headers[key] = data;
             return this;
         }
+
+        public int Timeout { get; set; }
+        public int ReadWriteTimeout { get; set; }
     }
 }
 

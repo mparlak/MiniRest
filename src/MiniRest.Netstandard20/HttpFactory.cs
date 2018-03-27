@@ -27,8 +27,19 @@ namespace MiniRest
                 if (webRequest == null) return null;
                 webRequest.Headers = _restRequest.Headers;
                 webRequest.Method = _restRequest.Method.ToString();
+                if (_restRequest.Timeout > default(int))
+                {
+                    webRequest.Timeout = _restRequest.Timeout;
+                }
+
+                if (_restRequest.ReadWriteTimeout > default(int))
+                {
+                    webRequest.ReadWriteTimeout = _restRequest.ReadWriteTimeout;
+                }
                 if (!string.IsNullOrEmpty(_restRequest.ContentType))
+                {
                     webRequest.ContentType = _restRequest.ContentType;
+                }
                 if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
                 {
                     var output = Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
@@ -51,8 +62,20 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
-                response.StatusCode = ((HttpWebResponse)ex.Response).StatusCode;
-                response.StatusDescription = ((HttpWebResponse)ex.Response).StatusDescription;
+                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
+
+                if (statusCode != null)
+                {
+                    response.StatusCode = (HttpStatusCode)statusCode;
+                }
+
+                var statusDescription = (ex.Response as HttpWebResponse)?.StatusDescription;
+
+                if (!string.IsNullOrEmpty(statusDescription))
+                {
+                    response.StatusDescription = statusDescription;
+                }
+
                 response.ErrorMessage = ex.Message;
             }
             return response;
@@ -67,8 +90,19 @@ namespace MiniRest
                 if (webRequest == null) return null;
                 webRequest.Headers = _restRequest.Headers;
                 webRequest.Method = _restRequest.Method.ToString();
+                if (_restRequest.Timeout > default(int))
+                {
+                    webRequest.Timeout = _restRequest.Timeout;
+                }
+
+                if (_restRequest.ReadWriteTimeout > default(int))
+                {
+                    webRequest.ReadWriteTimeout = _restRequest.ReadWriteTimeout;
+                }
                 if (!string.IsNullOrEmpty(_restRequest.ContentType))
+                {
                     webRequest.ContentType = _restRequest.ContentType;
+                }
                 if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
                 {
                     var output = Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
@@ -91,8 +125,20 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
-                response.StatusCode = ((HttpWebResponse)ex.Response).StatusCode;
-                response.StatusDescription = ((HttpWebResponse)ex.Response).StatusDescription;
+                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
+
+                if (statusCode != null)
+                {
+                    response.StatusCode = (HttpStatusCode)statusCode;
+                }
+
+                var statusDescription = (ex.Response as HttpWebResponse)?.StatusDescription;
+
+                if (!string.IsNullOrEmpty(statusDescription))
+                {
+                    response.StatusDescription = statusDescription;
+                }
+
                 response.ErrorMessage = ex.Message;
             }
             return response;

@@ -89,5 +89,15 @@ namespace MiniRest
         /// <param name="data"></param>
         /// <returns></returns>
         IRestRequest AddWebHeaderCollection(string key, string data);
+
+        /// <summary>
+        /// Timeout in milliseconds to be used for the request.
+        /// </summary>
+        int Timeout { get; set; }
+
+        /// <summary>
+        /// ReadWriteTimeout in milliseconds to be used for the request.
+        /// </summary>
+        int ReadWriteTimeout { get; set; }
     }
 }
