@@ -9,6 +9,16 @@ Fast Lightweight Http Api Client
 * Supports Basic Authentication
 * Supports WebHeaderCollection extra parameter
 
+### Installing MiniRest
+
+You should install [MiniRest with NuGet](https://www.nuget.org/packages/MiniRest):
+
+    Install-Package MiniRest
+    
+Or via the .NET Core command line interface:
+
+    dotnet add package MiniRest
+
 ### Preview
 
 ```csharp
