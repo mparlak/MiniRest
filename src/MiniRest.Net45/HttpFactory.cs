@@ -43,7 +43,7 @@ namespace MiniRest
                 }
                 if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
                 {
-                    var output = Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
+                    var output = _restRequest.DataFormat == DataFormat.None ? _restRequest.Body.ToString() : Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
                     var byteArray = Encoding.UTF8.GetBytes(output);
                     using (var stream = webRequest.GetRequestStream())
                     {
@@ -107,7 +107,7 @@ namespace MiniRest
                 }
                 if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
                 {
-                    var output = Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
+                    var output = _restRequest.DataFormat == DataFormat.None ? _restRequest.Body.ToString() : Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
                     var byteArray = Encoding.UTF8.GetBytes(output);
                     using (var stream = await webRequest.GetRequestStreamAsync())
                     {

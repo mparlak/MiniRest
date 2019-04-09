@@ -45,6 +45,7 @@ namespace MiniRest
     /// </summary>
     public enum DataFormat
     {
+        None,
         /// <summary>
         /// HTTP ContentType Xml
         /// </summary>
