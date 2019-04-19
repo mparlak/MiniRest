@@ -63,6 +63,12 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
+                using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
+                {
+                    string result = streamReader.ReadToEnd();
+                    response.Content = result;
+                }
+
                 var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
 
                 if (statusCode != null)
@@ -127,6 +133,12 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
+                using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
+                {
+                    string result = streamReader.ReadToEnd();
+                    response.Content = result;
+                }
+
                 var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
 
                 if (statusCode != null)
