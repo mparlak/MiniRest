@@ -63,13 +63,16 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
-                using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
+                if (ex.Response != null)
                 {
-                    string result = streamReader.ReadToEnd();
-                    response.Content = result;
+                    using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
+                    {
+                        string result = streamReader.ReadToEnd();
+                        response.Content = result;
+                    }
                 }
 
-                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
+                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
 
                 if (statusCode != null)
                 {
@@ -133,13 +136,16 @@ namespace MiniRest
             }
             catch (WebException ex)
             {
-                using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
+                if (ex.Response != null)
                 {
-                    string result = streamReader.ReadToEnd();
-                    response.Content = result;
+                    using (var streamReader = new StreamReader(ex.Response.GetResponseStream()))
+                    {
+                        string result = streamReader.ReadToEnd();
+                        response.Content = result;
+                    }
                 }
 
-                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode;
+                var statusCode = (ex.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
 
                 if (statusCode != null)
                 {
