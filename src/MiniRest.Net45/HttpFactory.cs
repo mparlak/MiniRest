@@ -11,11 +11,9 @@ namespace MiniRest
     public class HttpFactory : IHttpFactory
     {
         private readonly IRestRequest _restRequest;
-        private readonly Uri _baseUri;
         public HttpFactory(IRestRequest restRequest)
         {
             _restRequest = restRequest;
-            _baseUri = new Uri(restRequest.BaseUrl);
         }
 
         public IHttpResponse Execute()
@@ -23,7 +21,7 @@ namespace MiniRest
             IHttpResponse response = new HttpResponse();
             try
             {
-                var webRequest = WebRequest.Create(_baseUri + _restRequest.Path) as HttpWebRequest;
+                var webRequest = WebRequest.Create(_restRequest.BaseUrl + _restRequest.Path) as HttpWebRequest;
                 if (webRequest == null) return null;
                 webRequest.Headers = _restRequest.Headers;
                 webRequest.Method = _restRequest.Method.ToString();
@@ -41,7 +39,7 @@ namespace MiniRest
                 {
                     webRequest.ContentType = _restRequest.ContentType;
                 }
-                if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
+                if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE || _restRequest.Method == Method.PATCH)
                 {
                     var output = _restRequest.DataFormat == DataFormat.None ? _restRequest.Body.ToString() : Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
                     var byteArray = Encoding.UTF8.GetBytes(output);
@@ -96,7 +94,7 @@ namespace MiniRest
             IHttpResponse response = new HttpResponse();
             try
             {
-                var webRequest = WebRequest.Create(_baseUri + _restRequest.Path) as HttpWebRequest;
+                var webRequest = WebRequest.Create(_restRequest.BaseUrl + _restRequest.Path) as HttpWebRequest;
                 if (webRequest == null) return null;
                 webRequest.Headers = _restRequest.Headers;
                 webRequest.Method = _restRequest.Method.ToString();
@@ -114,7 +112,7 @@ namespace MiniRest
                 {
                     webRequest.ContentType = _restRequest.ContentType;
                 }
-                if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE)
+                if (_restRequest.Method == Method.POST || _restRequest.Method == Method.PUT || _restRequest.Method == Method.DELETE || _restRequest.Method == Method.PATCH)
                 {
                     var output = _restRequest.DataFormat == DataFormat.None ? _restRequest.Body.ToString() : Parser.Serialize(_restRequest.DataFormat, _restRequest.Body);
                     var byteArray = Encoding.UTF8.GetBytes(output);
